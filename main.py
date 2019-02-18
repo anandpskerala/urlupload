@@ -163,7 +163,7 @@ def video(client, message):
                                     progress_args=('odysseusmax',msg.message_id,'Downloading...',)
                                     )
         e = time.time()-s
-        print((message.document.file_size/(1024*1024))/e))
+        print((message.document.file_size/(1024*1024))/e)
         duration, width, height = getLength(file)
         
         s = time.time()
