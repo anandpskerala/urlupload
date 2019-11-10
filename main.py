@@ -108,7 +108,7 @@ def down(c, cur, tot, chat_id, message_id,status):
         return
 
 
-@app.on_message(Filters.command(command='cancel',prefix='.') & Filters.private & Filters.user('odysseusmax'))
+@app.on_message(Filters.command(command='cancel',prefix='.') & Filters.private)
 def cancl(client, message):
     print(message)
     global manage
@@ -119,7 +119,7 @@ def cancl(client, message):
 
 
 #Responce for messages
-@app.on_message(Filters.text & Filters.private & Filters.user('odysseusmax'))
+@app.on_message(Filters.text & Filters.private)
 def mess(client, message):
     global manage
     if(message.entities and message.entities[0].type in 'url'):
@@ -146,7 +146,7 @@ def mess(client, message):
             client.delete_messages('odysseusmax',msg.message_id,True)
             client.send_message('odysseusmax',dl[1])
 
-@app.on_message(Filters.document & Filters.private & Filters.user('odysseusmax'))
+@app.on_message(Filters.document & Filters.private)
 def video(client, message):
     global manage
     if('video' in message.document.mime_type):
@@ -185,7 +185,7 @@ def video(client, message):
 
 
       
-@app.on_message(Filters.photo & Filters.private & Filters.user('odysseusmax'))
+@app.on_message(Filters.photo & Filters.private)
 def foto(client, message):
     print(message.photo)
     g = client.download_media(message=message.photo.sizes[0],file_name='thumb.jpeg')
