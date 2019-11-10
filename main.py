@@ -8,7 +8,7 @@ try:
     import config
 except ImportError:
     with open('config.py', "w") as the_file:
-        tok = str(input("Enter your bot TOKEN / Username : "))
+        tok = str(input("812132645:AAHAo1prXYco71Wf-uxtOGh3sKmzVC-ZkB0 / @Utube_UploaderBot  "))
         content = "TOKEN = '"+tok+"""'"""
         the_file.write(content)
     import config
