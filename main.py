@@ -108,7 +108,7 @@ def down(c, cur, tot, chat_id, message_id,status):
         return
 
 
-@app.on_message(Filters.command(command='cancel',prefix='.') & Filters.private)
+@app.on_message(Filters.command(["cancel"]) & Filters.private)
 def cancl(client, message):
     print(message)
     global manage
