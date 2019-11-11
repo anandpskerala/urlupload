@@ -113,31 +113,31 @@ def down(c, cur, tot, chat_id, message_id,status):
 
 
 @app.on_message(Filters.command(["cancel"]) & Filters.private)
-def cancl(client, message):
+def cancl(client, message, update):
     print(message)
     global manage
     if(manage['odysseusmax']):
         manage['odysseusmax'] = False
     else:
-        client.send_message('odysseusmax',"not processing anything")
+        client.send_message(update.from_user.id', text="not processing anything")
 
 
 #Responce for messages
 @app.on_message(Filters.text & Filters.private)
-def mess(client, message):
+def mess(client, message, update):
     global manage
     if(message.entities and message.entities[0].type in 'url'):
         msg = client.send_message('odysseusmax',"trying to download")
         manage['odysseusmax'] = True
         dl = downloadFile(client,msg.message_id,message.text)
         if(dl[0]):
-            client.delete_messages('odysseusmax',msg.message_id,True)
-            msg = client.send_message('odysseusmax',"uploading")
+            client.delete_messages(update.from_user.id,msg.message_id,True)
+            msg = client.send_message(update.from_user.id, text="uploading")
             s=time.time()
             print(dl)
             if('video' in dl[4]):
                 duration,width,height = getLength(dl[1])
-                snt = client.send_video(chat_id='odysseusmax',video=dl[1],duration=duration,width=width,height=height,thumb='downloads/thumb.jpeg',supports_streaming=True,reply_to_message_id=message.message_id,progress=down,progress_args=('odysseusmax',msg.message_id,'uploading',))
+                snt = client.send_video(chat_id=update.from_user.id,video=dl[1],duration=duration,width=width,height=height,thumb='downloads/thumb.jpeg',supports_streaming=True,reply_to_message_id=message.message_id,progress=down,progress_args=('odysseusmax',msg.message_id,'uploading',))
             else:
                 snt = client.send_document(chat_id='odysseusmax',document=dl[1],thumb='downloads/thumb.jpeg',reply_to_message_id=message.message_id,progress=down,progress_args=('odysseusmax',msg.message_id,'uploading',))
             e=time.time()-s
