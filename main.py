@@ -2,6 +2,10 @@ from pyrogram import Client, Filters
 import mimetypes,requests,os,re,time
 from hachoir.metadata import extractMetadata
 from hachoir.parser import createParser
+import logging
+logger = logging.getLogger(__name__) 
+logging.getLogger("pyrogram").setLevel(logging.WARNING)
+
 
 
 try:
@@ -13,8 +17,8 @@ except ImportError:
         the_file.write(content)
     import config
 
-app = Client(config.TOKEN)
-
+app = Client("mybot", bot_token=config.TOKEN, api_id=config.API_ID, api_hash=config.API_HASH)
+#Iprint(f)  
 upp = '◻◻◻◻◻◻◻◻◻◻'
 ctr = "◼"
 
